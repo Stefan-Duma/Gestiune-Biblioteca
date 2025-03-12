@@ -1,10 +1,7 @@
 #include "client.h"
 
-client::client(string nume, string prenume)
+client::client(string nume, string prenume) : persoana(nume, prenume)
 {
-    this->nume = nume;
-    this->prenume = prenume;
-    
     static int next_id = 0;
     this->id = next_id++;
 }

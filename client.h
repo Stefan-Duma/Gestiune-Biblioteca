@@ -1,17 +1,16 @@
 #ifndef CLIENT_H
 #define CLIENT_H
 
+#include "persoana.h"
 #include <string>
 using namespace std;
 
-class client
+class client : public persoana
 {
     private:
-        string nume;
-        string prenume;
         int id;
     public:
-        client(string nume = "", string prenume = "");
+        client(string nume, string prenume);
         string get_nume() {return nume;}
         string get_prenume() {return prenume;}
         int get_id() {return id;}
