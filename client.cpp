@@ -17,3 +17,8 @@ void client::set_prenume(const string prenume)
     if(prenume.empty()) return;
     this->prenume = prenume;
 }
+
+void client::set_id_carte(uint id_carte)
+{
+    this->id_carte = id_carte;
+}

@@ -8,16 +8,17 @@ using namespace std;
 class client : public persoana
 {
     private:
-        int id;
+        uint id;
+        uint id_carte;
     public:
         client(string nume, string prenume);
         string get_nume() {return nume;}
         string get_prenume() {return prenume;}
-        int get_id() {return id;}
+        uint get_id() {return id;}
 
-        void set_nume(const string nume);
-        void set_prenume(const string prenume);
-        
+        void set_nume(string nume);
+        void set_prenume(string prenume);
+        void set_id_carte(uint id_carte);
         ~client(){}
 };
 

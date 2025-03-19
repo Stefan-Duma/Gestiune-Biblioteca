@@ -6,12 +6,25 @@ using namespace std;
 
 int main()
 {
-    client alex("Alex", "Florin");
-    client john("John", "Jameson");
-    john.set_nume("Florian");
-    cout << alex.get_nume() << endl <<  alex.get_prenume() << endl << alex.get_id() << endl;
-    cout << john.get_nume() << endl << john.get_prenume() << endl << john.get_id() << endl;
-    carte carte1("Crima si pedeapsa", {"John", "Doe"}, 120, 300);
-    cout << carte1.get_autor() << carte1.get_numar_pagini() << carte1.get_nume_carte() << carte1.get_pret() << endl;
+    int optiune = 0;
+    do{
+        switch(toupper(optiune))
+        {
+            case 1: //Adauga carte
+                break;
+            case 2: //Adauga client
+                break;
+            case 3: //Afiseaza lista carti
+                break;
+            case 4: //Afiseaza lista clienti
+                break;    
+            case 5:
+                break;    
+            default:
+                break;
+        }
+    }
+    while(optiune != 0);
+    
     return 0;
 }
