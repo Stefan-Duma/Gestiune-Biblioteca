@@ -1,7 +1,7 @@
 #include <iostream>
-#include "client.h"
-#include "carte.h"
-#include "persoana.h"
+#include "src/client.h"
+#include "src/carte.h"
+#include "src/persoana.h"
 using namespace std;
 
 int main()

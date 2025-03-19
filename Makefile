@@ -1,10 +1,11 @@
 CC = g++
-CFLAGS = -Wall -Werror -Wextra -L.
-SFML_FLAGS = -lsfml-graphics -lsfml-window -lsfml-system -lsfml-widgets
+CFLAGS = -Wall -Werror -Wextra -L./lib
+SFML_FLAGS = -lsfml-graphics -lsfml-window -lsfml-system -lsfml-widgets -lGL
 
 all:
-	$(CC) $(CFLAGS) *.cpp -o main
+	$(CC) $(CFLAGS) main.cpp src/*.cpp -o main
 	./main
 
 ui:
-	$(CC) $(CFLAGS) gui.cpp -o gui $(SFML_FLAGS)
+	$(CC) $(CFLAGS) gui/*.cpp -o ui $(SFML_FLAGS)
+	./ui
