@@ -1,12 +1,18 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <vector>
 #include "button.h"
+#include "main_menu.h"
 
+#define default_param(y_offset) sf::Vector2f(10, 10 + (y_offset)), sf::Vector2f(150, 60), sf::Color(128, 128, 128)
+
+using namespace std;
+using namespace sf;
 int main() {
     sf::RenderWindow window(sf::VideoMode(800, 600), "SFML Button Example");
-    Button myButton(sf::Vector2f(10, 10), sf::Vector2f(150, 60), sf::Color::Red, "Click Me!");
-    Button myButton2(sf::Vector2f(10, 10+10+60), sf::Vector2f(150, 60), sf::Color::Green, "Click Me!");
-
+    Button myButton(default_param(0), "Click Me!");
+    main_menu mn;
+    
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -21,10 +27,9 @@ int main() {
                 }
             }
         }
-
+        
         window.clear();
         myButton.draw(window);
-        myButton2.draw(window);
         window.display();
     }
 

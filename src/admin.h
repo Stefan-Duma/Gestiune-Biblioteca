@@ -10,18 +10,18 @@ using namespace std;
 
 class admin{
     private:
-        vector<client> clienti;
-        vector<carte> carti;
+        vector<client> clients;
+        vector<carte> books;
     public:
         admin(){}
-        void add(const client& client_nou) {clienti.push_back(client_nou);}
-        void add(const carte& carte_noua) {carti.push_back(carte_noua);}
+        void add(const client& new_client) {clients.push_back(new_client);}
+        void add(const carte& new_book) {books.push_back(new_book);}
 
         client find_client(uint id);
         carte find_book(uint id);
         
-        vector<client> get_clients() {return clienti;}
-        vector<carte> get_books() {return carti;}
+        vector<client> get_clients() {return clients;}
+        vector<carte> get_books() {return books;}
         ~admin(){}
 };
 

@@ -3,18 +3,18 @@
 
 client admin::find_client(uint id)
 {
-    for(int i = 0; i < (int)clienti.size(); i++)
+    for(int i = 0; i < (int)clients.size(); i++)
     {
-        if(id == clienti[i].get_id()) return clienti[i];
+        if(id == clients[i].get_id()) return clients[i];
     }
     throw(new exceptie("Client negasit"));
 }
 
 carte admin::find_book(uint id)
 {
-    for(int i = 0; i < (int)carti.size(); i++)
+    for(int i = 0; i < (int)books.size(); i++)
     {
-        if(id == carti[i].get_id()) return carti[i];
+        if(id == books[i].get_id()) return books[i];
     }
     throw(new exceptie("Carte negasita"));
 }

@@ -3,6 +3,7 @@
 #include "src/carte.h"
 #include "src/persoana.h"
 #include "src/exceptie.h"
+#include "gui/main_menu.h"
 using namespace std;
 
 int main()

@@ -1,9 +1,10 @@
 CC = g++
 CFLAGS = -Wall -Werror -Wextra
-SDL_FLAGS = `sdl2-config --cflags --libs`
+SFML_FLAGS = -lsfml-graphics -lsfml-window -lsfml-system
 all:
-	$(CC) $(CFLAGS) main.cpp src/*.cpp -o main
+	$(CC) $(CFLAGS) main.cpp src/*.cpp gui/*.cpp -o main
 	./main
 
 ui:
-	$(CC) $(CFLAGS) $(SDL_FLAGS) 
+	$(CC) $(CFLAGS) gui/*.cpp -o gui/main $(SFML_FLAGS)
+	./gui/main
