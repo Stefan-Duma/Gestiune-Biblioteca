@@ -2,7 +2,7 @@
 #include <iostream>
 
 Button::Button(sf::Vector2f position_, sf::Vector2f size_, sf::Color color_, std::string text_)
-    : position(position_), size(size_), color(color_), text() {
+    : position(position_), size(size_), color(color_) {
     shape.setPosition(position);
     shape.setSize(size);
     shape.setFillColor(color);
@@ -10,13 +10,13 @@ Button::Button(sf::Vector2f position_, sf::Vector2f size_, sf::Color color_, std
     if (!font.loadFromFile("gui/Arial.ttf")) { // Replace with your font file
         std::cerr << "Error loading font!" << std::endl;
     }
-
     text.setFont(font);
-    text.setCharacterSize(24);
-    text.setFillColor(sf::Color::White);
+    text.setCharacterSize(20);
+    text.setFillColor(sf::Color::Black);
     text.setString(text_);
-    text.setPosition(position_.x + size_.x / 2 - text.getLocalBounds().width / 2,
-                        position_.y + size_.y / 2 - text.getLocalBounds().height / 2 - 10); // Center the text
+    text.setStyle(sf::Text::Italic);
+    text.setPosition(position.x + size.x / 2 - text.getLocalBounds().width / 2,
+                        position.y + size.y / 2 - text.getLocalBounds().height / 2); // Center the text
 }
 
 void Button::draw(sf::RenderWindow& window) {

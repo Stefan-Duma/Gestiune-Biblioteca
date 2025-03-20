@@ -11,10 +11,10 @@ class main_menu{
         vector<Button> menu;
     public:
         main_menu(){}
-        void add_button(Button& btn) {menu.push_back(btn);}
+        void add_button(Button btn) {menu.push_back(btn);}
         void draw_menu(sf::RenderWindow& window)
         {
-            for(Button& btn: menu) btn.draw(window);
+            for(Button btn: menu) btn.draw(window);
         }
         vector<Button> get_menu() {return menu;}
         ~main_menu(){}

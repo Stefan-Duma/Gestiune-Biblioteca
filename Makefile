@@ -2,7 +2,7 @@ CC = g++
 CFLAGS = -Wall -Werror -Wextra
 SFML_FLAGS = -lsfml-graphics -lsfml-window -lsfml-system
 all:
-	$(CC) $(CFLAGS) main.cpp src/*.cpp gui/*.cpp -o main
+	$(CC) $(CFLAGS) main.cpp src/*.cpp gui/*.cpp -o main $(SFML_FLAGS)
 	./main
 
 ui:

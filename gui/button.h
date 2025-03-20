@@ -12,12 +12,13 @@ class Button {
         sf::Color color;
         sf::Font font;
         sf::Text text;
-        std::string textString;
     public:
+        Button(){}
+        ~Button(){}
         Button(sf::Vector2f position, sf::Vector2f size, sf::Color color, std::string text);
         void draw(sf::RenderWindow& window);
         bool isClicked(sf::Vector2i mousePos);
-
+        
 };
 
 #endif // BUTTON_H
