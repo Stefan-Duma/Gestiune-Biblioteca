@@ -17,9 +17,11 @@ class admin{
         void add(const client& client_nou) {clienti.push_back(client_nou);}
         void add(const carte& carte_noua) {carti.push_back(carte_noua);}
 
-        void find_client(uint id);
-        void find_book(uint id);
+        client find_client(uint id);
+        carte find_book(uint id);
         
+        vector<client> get_clients() {return clienti;}
+        vector<carte> get_books() {return carti;}
         ~admin(){}
 };
 

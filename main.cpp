@@ -2,13 +2,14 @@
 #include "src/client.h"
 #include "src/carte.h"
 #include "src/persoana.h"
+#include "src/exceptie.h"
 using namespace std;
 
 int main()
 {
     int optiune = 0;
     do{
-        switch(toupper(optiune))
+        switch(optiune)
         {
             case 1: //Adauga carte
                 break;
@@ -25,6 +26,6 @@ int main()
         }
     }
     while(optiune != 0);
-    
+
     return 0;
 }
