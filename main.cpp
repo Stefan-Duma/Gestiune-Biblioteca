@@ -1,54 +1,103 @@
-#include <SFML/Graphics.hpp>
-#include <iostream>
-#include "src/client.h"
-#include "src/carte.h"
 #include "src/persoana.h"
+#include "src/carte.h"
+#include "src/abonat.h"
+#include "src/admin.h"
 #include "src/exceptie.h"
-#include "gui/button.h"
-#include "gui/main_menu.h"
-
+#include "src/admin_fisier.h"
+#include "src/functii_consola.h"
+#include <iostream>
 using namespace std;
 
-#define default_param(y_offset) sf::Vector2f(10, 10 + (y_offset)*70), sf::Vector2f(150, 60), sf::Color(192, 192, 192)
+//TODO1: Implementat legatura dintre abonat si cartile imprumutate, folosind un fisier cu structura:
+//id_abonat1: id_carte1, id_carte2, ...
+//id_abonat2: id_carte1, id_carte2, ...
 
+//TODO2: Rezolvat problema resetarii id-urilor.
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Main");
-    main_menu mn;
-    // char str[][20] = {"Adauga client", "Adauga carte", "Afisare clienti", "Afisare carti"};
-    // Button* btns = new Button[20];
-    // btns[0] = Button(default_param(0), str[0]);
-    // mn.add_button(btns[0]);
-    // btns[1] = Button(default_param(1), str[1]);
-    // mn.add_button(btns[1]);
-    Button btn = Button(default_param(0), "Adauga client");
-    mn.add_button(btn);
-    Button btn1 = Button(default_param(1), "Adauga carte");
-    mn.add_button(btn1);
-    Button btn2 = Button(default_param(2), "Afisare clienti");
-    mn.add_button(btn2);
-    Button btn3 = Button(default_param(3), "Afisare carti");
-    mn.add_button(btn3);
-
-    while (window.isOpen()) {
-        sf::Event event;
-        while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed) {
-                window.close();
-            }
-            if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) 
+    int optiune = 0;
+    admin_fisier admin_biblioteca("abonati.txt", "carti.txt");
+    abonat abonat_temporar;
+    carte carte_temporara;
+    string nume, prenume, info;
+    while(1){
+        try{
+            system("clear");
+            afisare_meniu();
+            cin >> optiune;
+            if(cin.fail())
             {
-                for(Button& buton : mn.get_menu())
-                {
-                    if(buton.isClicked(sf::Mouse::getPosition(window)))
-                    {
-                        cout << "It works!" << endl;
-                    }
-                }
+                cin.clear();
+                while(getchar() != '\n');
+                throw exceptie("Optiune invalida!");
             }
-            window.clear();
-            mn.draw_menu(window);
-            window.display();
+            switch (optiune) 
+            {
+                case 0:
+                    cout << "Oprire program!\n";
+                    return 0;
+                case 1:
+                    abonat_temporar = citire_consola_abonat();
+                    cout << "Abonat citit cu succes!";
+                    cin.ignore();
+                    getchar();
+                    break;
+                case 2:
+                    carte_temporara = citire_consola_carte();
+                    cout << "Carte citita cu succes!";
+                    getchar();
+                    break;
+                case 3:
+                    admin_biblioteca.write(abonat_temporar);
+                    cout << "Abonatul a fost salvat!";
+                    cin.ignore();
+                    getchar();
+                    break;
+                case 4:
+                    admin_biblioteca.write(carte_temporara);
+                    cout << "Cartea a fost salvata!";
+                    cin.ignore();
+                    getchar();
+                    break;
+                case 5:
+                    if(admin_biblioteca.get_abonati().empty()) admin_biblioteca.read_all_readers();
+                    afisare_abonati(admin_biblioteca);
+                    cin.ignore();
+                    getchar();
+                    break;
+                case 6:
+                    if(admin_biblioteca.get_books().empty()) admin_biblioteca.read_all_books();
+                    afisare_carti(admin_biblioteca);
+                    cin.ignore();
+                    getchar();
+                    break;
+                case 7:
+                    cout << "Introduceti numele abonatului: ";
+                    cin >> nume;
+                    cout << "Introduceti prenumele abonatului: ";
+                    cin >> prenume;
+                    afisare_abonat(admin_biblioteca.find_abonat(nume, prenume));
+                    cin.ignore();
+                    getchar();
+                    break;
+                case 8:
+                    cout << "Introduceti numele si prenumele autorului sau numele cartii: ";
+                    cin.ignore();
+                    getline(cin, info);
+                    afisare_carte(admin_biblioteca.find_book(info));    
+                    getchar();
+                    break;
+                default:
+                    cout << "Optiune invalida";
+                    cin.ignore();
+                    getchar();
+                    break;
+            }
+        }
+        catch(const exceptie& e)
+        {
+            cerr << e.mesaj;
+            getchar();
         }
     }
     return 0;

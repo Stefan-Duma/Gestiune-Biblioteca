@@ -16,7 +16,6 @@ class persoana{
         
         void set_nume(string nume);
         void set_prenume(string prenume);
-        void set_varsta(int varsta);
         ~persoana(){}
 };
 

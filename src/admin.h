@@ -3,25 +3,30 @@
 
 #include <iostream>
 #include <vector>
-#include "client.h"
+#include "abonat.h"
 #include "carte.h"
 
 using namespace std;
 
 class admin{
-    private:
-        vector<client> clients;
+    protected:
+        vector<abonat> abonati;
         vector<carte> books;
     public:
         admin(){}
-        void add(const client& new_client) {clients.push_back(new_client);}
-        void add(const carte& new_book) {books.push_back(new_book);}
+        void add(abonat new_abonat) {abonati.push_back(new_abonat);}
+        void add(carte new_book) {books.push_back(new_book);}
 
-        client find_client(uint id);
+        abonat find_abonat(string nume, string prenume);
+        abonat find_abonat(uint id);
+        carte find_book(string autor);
         carte find_book(uint id);
         
-        vector<client> get_clients() {return clients;}
+        vector<abonat> get_abonati() {return abonati;}
         vector<carte> get_books() {return books;}
+        
+        uint get_last_book_id() {return books.back().get_id();}
+        static string str_to_upper(string str);
         ~admin(){}
 };
 

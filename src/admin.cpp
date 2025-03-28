@@ -1,13 +1,34 @@
 #include "admin.h"
 #include "exceptie.h"
 
-client admin::find_client(uint id)
+string admin::str_to_upper(string str)
 {
-    for(int i = 0; i < (int)clients.size(); i++)
+    string out = "";
+    for(char ch: str)
     {
-        if(id == clients[i].get_id()) return clients[i];
+        out += toupper(ch);
     }
-    throw(new exceptie("Client negasit"));
+    return out;
+}
+
+abonat admin::find_abonat(uint id)
+{
+    for(int i = 0; i < (int)abonati.size(); i++)
+    {
+        if(id == abonati[i].get_id()) return abonati[i];
+    }
+    throw exceptie("Abonat negasit!\n");
+}
+
+abonat admin::find_abonat(string nume, string prenume)
+{
+    for(int i = 0; i < (int)abonati.size(); i++)
+    {
+        if( admin::str_to_upper(nume) == admin::str_to_upper(abonati[i].get_nume()) && 
+        admin::str_to_upper(prenume) == admin::str_to_upper(abonati[i].get_prenume())) return abonati[i];
+    }
+    cin.ignore();
+    throw exceptie("Abonat negasit!\n");
 }
 
 carte admin::find_book(uint id)
@@ -16,5 +37,15 @@ carte admin::find_book(uint id)
     {
         if(id == books[i].get_id()) return books[i];
     }
-    throw(new exceptie("Carte negasita"));
+    throw exceptie("Carte negasita!\n");
+}
+
+carte admin::find_book(string info)
+{
+    for(int i = 0; i < (int)books.size(); i++)
+    {
+        if( admin::str_to_upper(info) == admin::str_to_upper(books[i].get_nume_carte())) return books[i];
+        if( admin::str_to_upper(info) == admin::str_to_upper(books[i].get_autor())) return books[i];
+    }
+    throw exceptie("Carte negasita\n");
 }
