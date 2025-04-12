@@ -23,12 +23,15 @@ class admin_fisier : public admin
         void write(abonat& c);
         void write(carte& c);
         
-        static array<string, 5> split(string str);
+        static vector<string> split(string str);
 
         abonat read_next_abonat();
         carte read_next_book();
 
         void read_all_books();
         void read_all_readers();
+
+        void write_all_books();
+        void write_all_readers();
 };
 #endif //ADMIN_FISIER_H

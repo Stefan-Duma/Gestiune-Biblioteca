@@ -1,37 +1,51 @@
-#ifndef CITITOR_H
-#define CITITOR_H
+#ifndef ABONAT_H
+#define ABONAT_H
 
-#include "persoana.h"
 #include <string>
-#include <array>
-
+#include <vector>
+#include "enumerari.h"
+#include "exceptie.h"
 using namespace std;
 
-class abonat : public persoana
+class abonat
 {
     private:
         char sep = ';';
         uint id;
+
+        string nume;
+        string prenume;
+        string cnp;
+        Judet locul_nasterii;
+        
         string numar_telefon;
         string email;
-        uint id_carte;
     public:
         abonat(){}
-        abonat(string nume, string prenume, string nr_telefon, string email);
-        abonat(array<string, 5> linieFisier);
-        string get_nume() {return nume;}
-        string get_prenume() {return prenume;}
-        uint get_id() {return id;}
-        uint get_id_carte() {return id_carte; }
+        abonat(uint id, string nume, string prenume, string nr_telefon, string email, string cnp, Judet loc);
+        abonat(vector<string> linieFisier);
+        // Getteri pentru fiecare atribut
+        uint get_id() const { return id; }
+        string get_nume() const { return nume; }
+        string get_prenume() const { return prenume; }
+        string get_cnp() const { return cnp; }
+        Judet get_loc_nastere() const { return locul_nasterii; }
+        string get_numar_telefon() const { return numar_telefon; }
+        string get_email() const { return email; }
 
-        void set_nume(string nume);
-        void set_prenume(string prenume);
-        void set_id_carte(uint id_carte);
-        void set_email(string email);
-        void set_telefon(string nr_telefon);
-
+        // Setteri pentru fiecare atribut
+        void set_nume(string nume) { this->nume = nume; }
+        void set_prenume(string prenume) { this->prenume = prenume; }
+        void set_id(uint id) { this->id = id; }
+        void set_email(string email) { this->email = email; }
+        void set_telefon(string nr_telefon) { this->numar_telefon = nr_telefon; }
+        void set_cnp(string cnp) { this->cnp = cnp; }
+        void set_loc_nastere(Judet loc_nastere) { this->locul_nasterii = loc_nastere; }
         string abonat_to_file();
+        bool operator==(const abonat& other) const {
+            return id == other.id;
+        }
         ~abonat(){}
 };
 
-#endif //CITITOR_H
+#endif //ABONAT_H

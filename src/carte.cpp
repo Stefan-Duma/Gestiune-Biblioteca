@@ -1,35 +1,36 @@
 #include "carte.h"
 
-carte::carte(string nume_carte, string autor, uint pret, uint numar_pagini)
+carte::carte(string titlu, string autor, string editura, uint pret, uint numar_pagini)
 {
-    static uint next_id = 0;
-    this->nume_carte = nume_carte;
+    this->isbn = genereazaISBN();
+    this->titlu = titlu;
     this->autor = autor;
+    this->editura = editura;
     this->pret = pret;
     this->numar_pagini = numar_pagini;
-    this->id = next_id++;
 }
 
-carte::carte(array<string, 5> arr)
+carte::carte(vector<string> arr)
 {
-    id = (uint)atoi(arr[0].c_str());
-    nume_carte = arr[1];
+    isbn = arr[0];
+    titlu = arr[1];
     autor = arr[2];
-    pret = (uint) atoi(arr[3].c_str());
-    numar_pagini = (uint)atoi(arr[4].c_str());
+    editura = arr[3];
+    pret = (uint) atoi(arr[4].c_str());
+    numar_pagini = (uint)atoi(arr[5].c_str());
 }
 
 string carte::carte_to_file()
 {
-    return to_string(id) + sep + nume_carte + sep + autor +
+    return isbn + sep + titlu + sep + autor + editura +
            sep + to_string(pret) + sep + to_string(numar_pagini) + sep + '\n';
 
 }
 
-void carte::set_nume_carte(string nume_carte)
+void carte::set_titlu(string titlu)
 {
-    if(nume_carte.empty()) return;
-    this->nume_carte = nume_carte;
+    if(titlu.empty()) return;
+    this->titlu = titlu;
 }
 
 void carte::set_pret(uint pret)
@@ -40,4 +41,43 @@ void carte::set_pret(uint pret)
 void carte::set_numar_pagini(uint numar_pagini)
 {
     this->numar_pagini = numar_pagini;
+}
+
+// Functie pentru calcularea cifrei de control ISBN-13
+int carte::calculeazaCifraControl(string isbn) {
+    int suma = 0;
+
+    // ISBN-13 trebuie sa aiba 12 cifre inainte de cifra de control
+    for (int i = 0; i < 12; i++) {
+        int cifra = isbn[i] - '0';
+        if (i % 2 == 0)
+            suma += cifra;       // pozitie impara (0, 2, 4...): adaugam
+        else
+            suma += cifra * 3;   // pozitie para (1, 3, 5...): inmultim cu 3 si adaugam
+    }
+
+    int rest = suma % 10;
+    int cifraControl = (10 - rest) % 10;
+
+    return cifraControl;
+}
+
+// Functie pentru generarea unui ISBN-13 valid
+string carte::genereazaISBN() {
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> distrib(0, 9);
+
+    string isbn = "978"; // Prefixul standard pentru ISBN-13
+
+    // Adaugam 9 cifre random pentru a completa 12 cifre in total
+    for (int i = 0; i < 9; i++) {
+        isbn += to_string(distrib(gen));
+    }
+
+    // Calculeaza cifra de control pe baza primelor 12 cifre
+    int cifraControl = calculeazaCifraControl(isbn);
+    isbn += to_string(cifraControl); // Adauga cifra de control la final
+
+    return isbn;
 }

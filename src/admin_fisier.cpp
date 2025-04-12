@@ -42,7 +42,7 @@ abonat admin_fisier::read_next_abonat()
     getline(fisier_abonati, linie);
     fisier_abonati.close();
 
-    array<string, 5> arr = split(linie);
+    vector<string> arr = split(linie);
     current_line++;
     return abonat(arr);
 }
@@ -58,7 +58,7 @@ carte admin_fisier::read_next_book()
     getline(fisier_carti, linie);
     fisier_carti.close();
 
-    array<string, 5> arr = split(linie);
+    vector<string> arr = split(linie);
     current_line++;
     return carte(arr);
 }
@@ -66,7 +66,7 @@ carte admin_fisier::read_next_book()
 void admin_fisier::read_all_books()
 {
     string linie;
-    array<string, 5> arr;
+    vector<string> arr;
     fisier_carti.open(nume_fisier_carti, ios::in);
 
     while(getline(fisier_carti, linie))
@@ -80,7 +80,7 @@ void admin_fisier::read_all_books()
 void admin_fisier::read_all_readers()
 {
     string linie;
-    array<string, 5> arr;
+    vector<string> arr;
     fisier_abonati.open(nume_fisier_abonati, ios::in);
 
     while(getline(fisier_abonati, linie))
@@ -91,17 +91,35 @@ void admin_fisier::read_all_readers()
     fisier_abonati.close();
 }
 
-array<string, 5> admin_fisier::split(string str)
+void admin_fisier::write_all_books()
 {
-    array<string, 5> arr;
+    fisier_carti.open(nume_fisier_carti, ios::out | ios::trunc);
+    for(carte& c: books)
+    {
+        fisier_carti << c.carte_to_file();
+    }
+    fisier_carti.close();
+}        
+
+void admin_fisier::write_all_readers()
+{
+    fisier_abonati.open(nume_fisier_abonati, ios::out | ios::trunc);
+    for(abonat& a: abonati)
+    {
+        fisier_abonati << a.abonat_to_file();
+    }
+    fisier_abonati.close();
+}    
+
+vector<string> admin_fisier::split(string str)
+{
+    vector<string> arr;
     string word = "";
-    int i = 0;
     for(char ch: str)
     {
         if(ch == ';')
         {
-            arr[i] = word;
-            i++;
+            arr.push_back(word);
             word = "";
         }
         else

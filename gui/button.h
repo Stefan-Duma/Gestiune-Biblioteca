@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <string>
+#define default_param(y_offset) sf::Vector2f(10, 10 + (y_offset)*70), sf::Vector2f(150, 60), sf::Color(255, 140, 0)
 
 class Button {
     private:

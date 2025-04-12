@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include "abonat.h"
 #include "carte.h"
 
@@ -17,15 +18,15 @@ class admin{
         void add(abonat new_abonat) {abonati.push_back(new_abonat);}
         void add(carte new_book) {books.push_back(new_book);}
 
-        abonat find_abonat(string nume, string prenume);
-        abonat find_abonat(uint id);
-        carte find_book(string autor);
-        carte find_book(uint id);
+        abonat find_abonat(string info);
+        carte find_book(string info);
         
         vector<abonat> get_abonati() {return abonati;}
         vector<carte> get_books() {return books;}
         
-        uint get_last_book_id() {return books.back().get_id();}
+        void remove_abonat(string info);
+        void remove_book(string info);
+
         static string str_to_upper(string str);
         ~admin(){}
 };

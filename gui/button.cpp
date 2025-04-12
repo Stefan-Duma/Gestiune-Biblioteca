@@ -11,10 +11,10 @@ Button::Button(sf::Vector2f position_, sf::Vector2f size_, sf::Color color_, std
         std::cerr << "Error loading font!" << std::endl;
     }
     text.setFont(font);
-    text.setCharacterSize(20);
+    text.setCharacterSize(18);
     text.setFillColor(sf::Color::Black);
     text.setString(text_);
-    text.setStyle(sf::Text::Italic);
+    text.setStyle(sf::Text::Bold);
     text.setPosition(position.x + size.x / 2 - text.getLocalBounds().width / 2,
                         position.y + size.y / 2 - text.getLocalBounds().height / 2); // Center the text
 }
