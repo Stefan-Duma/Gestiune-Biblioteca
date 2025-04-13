@@ -33,6 +33,11 @@ class admin{
         {
             abonati = v;
         }
+
+        void set_books(const std::vector<carte>& v)
+        {
+            books = v;
+        }
         ~admin(){}
 };
 

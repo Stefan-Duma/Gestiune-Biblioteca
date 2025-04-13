@@ -51,6 +51,59 @@ void afisare_abonat(sf::RenderWindow& window, sf::Font& font, abonat& a) {
     window.draw(textEmail);
 }
 
+void afisare_carte(sf::RenderWindow& window, sf::Font& font, carte& c) {
+    // Creăm obiecte text pentru fiecare câmp
+    sf::Text textTitlu, textAutor, textEditura, textPret, textPagini, textISBN;
+
+    // Setăm fontul și dimensiunea textului
+    textTitlu.setFont(font);
+    textAutor.setFont(font);
+    textEditura.setFont(font);
+    textPret.setFont(font);
+    textPagini.setFont(font);
+    textISBN.setFont(font);
+
+    textTitlu.setCharacterSize(24);
+    textAutor.setCharacterSize(24);
+    textEditura.setCharacterSize(24);
+    textPret.setCharacterSize(24);
+    textPagini.setCharacterSize(24);
+    textISBN.setCharacterSize(24);
+
+    // Setăm culoarea
+    textTitlu.setFillColor(sf::Color::White);
+    textAutor.setFillColor(sf::Color::White);
+    textEditura.setFillColor(sf::Color::White);
+    textPret.setFillColor(sf::Color::White);
+    textPagini.setFillColor(sf::Color::White);
+    textISBN.setFillColor(sf::Color::White);
+
+    // Completăm conținutul textului
+    textTitlu.setString("Titlu: " + c.get_titlu());
+    textAutor.setString("Autor: " + c.get_autor());
+    textEditura.setString("Editura: " + c.get_editura());
+    textPret.setString("Pret: " + std::to_string(c.get_pret()) + " RON");
+    textPagini.setString("Numar pagini: " + std::to_string(c.get_numar_pagini()));
+    textISBN.setString("ISBN: " + c.get_isbn());
+
+    // Poziționăm textele
+    textTitlu.setPosition(300, 50);
+    textAutor.setPosition(300, 100);
+    textEditura.setPosition(300, 150);
+    textPret.setPosition(300, 200);
+    textPagini.setPosition(300, 250);
+    textISBN.setPosition(300, 300);
+
+    // Le desenăm
+    window.draw(textTitlu);
+    window.draw(textAutor);
+    window.draw(textEditura);
+    window.draw(textPret);
+    window.draw(textPagini);
+    window.draw(textISBN);
+}
+
+
 void update(vector<text_input> prompt, abonat& Abonat)
 {
     for (size_t i = 0; i < prompt.size(); ++i) {
@@ -85,6 +138,35 @@ void update(vector<text_input> prompt, abonat& Abonat)
     }
 }
 
+void update(vector<text_input> prompt, carte& Carte)
+{
+    for (size_t i = 0; i < prompt.size(); ++i) {
+        if (prompt[i].getText().empty()) {
+            std::cout << "Câmpul " << i + 1 << " este gol!" << std::endl;
+        } else {
+            switch (i) {
+                case 0:
+                    Carte.set_titlu(prompt[i].getText());
+                    break;
+                case 1:
+                    Carte.set_autor(prompt[i].getText());
+                    break;
+                case 2:
+                    Carte.set_editura(prompt[i].getText());
+                    break;
+                case 3:
+                    Carte.set_pret(static_cast<uint>(std::stoi(prompt[i].getText())));
+                    break;
+                case 4:
+                    Carte.set_numar_pagini(static_cast<uint>(std::stoi(prompt[i].getText())));
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+}
+
 void get_info(vector<text_input> prompt, string& info)
 {
     string nume, prenume, data;
@@ -97,6 +179,14 @@ void get_info(vector<text_input> prompt, string& info)
             data = prompt[i].getText();
             if(data != "") info = data;
         }
+    }
+}
+
+void get_info_carte(vector<text_input> prompt, string& info)
+{
+    for(const auto& tx: prompt)
+    {
+        if(tx.getText() != "") info = tx.getText();
     }
 }
 /*

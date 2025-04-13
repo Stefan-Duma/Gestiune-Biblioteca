@@ -6,7 +6,7 @@
 #include "gui/button.h"
 #include "gui/text_input.h"
 #include "gui/meniu_abonati.h"
-
+#include "gui/meniu_carti.h"
 
 using namespace std;
 
@@ -37,6 +37,11 @@ int main()
                     {
                         window.setActive(false);
                         open_meniu_abonati();
+                    }
+                    if(carti.isClicked(sf::Mouse::getPosition(window)))
+                    {
+                        window.setActive(false);
+                        open_meniu_carti();
                     }
                     if(exit.isClicked(sf::Mouse::getPosition(window)))
                     {

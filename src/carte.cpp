@@ -22,7 +22,7 @@ carte::carte(vector<string> arr)
 
 string carte::carte_to_file()
 {
-    return isbn + sep + titlu + sep + autor + editura +
+    return isbn + sep + titlu + sep + autor + sep + editura +
            sep + to_string(pret) + sep + to_string(numar_pagini) + sep + '\n';
 
 }
