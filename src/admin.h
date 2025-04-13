@@ -28,6 +28,11 @@ class admin{
         void remove_book(string info);
 
         static string str_to_upper(string str);
+
+        void set_abonati(const std::vector<abonat>& v) 
+        {
+            abonati = v;
+        }
         ~admin(){}
 };
 

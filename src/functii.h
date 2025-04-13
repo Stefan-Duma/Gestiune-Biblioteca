@@ -1,7 +1,7 @@
 #ifndef FUNCTII_H
 #define FUNCTII_H
 #include <SFML/Graphics.hpp>
-
+#include "../gui/text_input.h"
 #include "abonat.h"
 #include "carte.h"
 #include "admin.h"
@@ -24,9 +24,11 @@ int calculeazaCifraControl(const string& cnp);
 string genereazaCNP(char sex, int an, Luna luna, int zi, int codJudet);
 bool comparaCNPuri(const string& cnp1, const string& cnp2);
 
-
+void update(vector<text_input> prompt, abonat& Abonat);
+void get_info(vector<text_input> prompt, string& info);
 //Functii pentru interfata grafica
 void afisare_abonat(sf::RenderWindow& window, sf::Font& font, abonat& a);
+
 
 string str_to_upper(string str);
 #endif //FUNCTII_CONSOLA_H

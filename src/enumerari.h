@@ -10,7 +10,7 @@ enum Judet {
     Braila, Buzau, CarasSeverin, Calarasi, Cluj, Constanta, Covasna, Dambovita,
     Dolj, Galati, Giurgiu, Gorj, Harghita, Hunedoara, Ialomita, Iasi, Ilfov,
     Maramures, Mehedinti, Mures, Neamt, Olt, Prahova, Salaj, SatuMare, Sibiu,
-    Suceava, Teleorman, Timis, Tulcea, Valcea, Vaslui, Vrancea
+    Suceava, Teleorman, Timis, Tulcea, Valcea, Vaslui, Vrancea, Necunoscut = 100
 };
 
 enum Luna{

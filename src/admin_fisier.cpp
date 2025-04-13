@@ -65,6 +65,7 @@ carte admin_fisier::read_next_book()
 
 void admin_fisier::read_all_books()
 {
+    books.clear();
     string linie;
     vector<string> arr;
     fisier_carti.open(nume_fisier_carti, ios::in);
@@ -79,6 +80,7 @@ void admin_fisier::read_all_books()
 
 void admin_fisier::read_all_readers()
 {
+    abonati.clear();
     string linie;
     vector<string> arr;
     fisier_abonati.open(nume_fisier_abonati, ios::in);

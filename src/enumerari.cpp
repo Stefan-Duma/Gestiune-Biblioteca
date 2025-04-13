@@ -91,5 +91,5 @@ Judet stringToJudet(const std::string& str) {
     if (str == "Vaslui") return Judet::Vaslui;
     if (str == "Vrancea") return Judet::Vrancea;
 
-    throw std::invalid_argument("Judet necunoscut: " + str);
+    return Judet::Necunoscut;
 }

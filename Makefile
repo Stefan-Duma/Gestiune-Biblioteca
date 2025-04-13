@@ -1,15 +1,32 @@
+# Compilator și flag-uri
 CC = g++
-CFLAGS = -Wall -Werror -Wextra
-SFML_FLAGS = -lsfml-graphics -lsfml-window -lsfml-system
+CFLAGS = -Wall -Werror -Wextra -Iinclude
+LDFLAGS = -lsfml-graphics -lsfml-window -lsfml-system
 
-all:
-	$(CC) $(CFLAGS) main.cpp src/*.cpp gui/*.cpp -o main $(SFML_FLAGS)
-	./main
+# Surse și directoare
+SRC_DIRS = src gui
+SRC_FILES = main.cpp $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.cpp))
+OBJ_FILES = $(SRC_FILES:.cpp=.o)
 
-ui:
-	$(CC) $(CFLAGS) gui/*.cpp -o gui/main $(SFML_FLAGS)
-	./gui/main
+# Executabil
+TARGET = main
 
-demo:
-	$(CC) $(CFLAGS) main.cpp src/*.cpp -o main
-	./main
+# Regula implicită
+all: $(TARGET)
+
+# Linkarea obiectelor într-un executabil
+$(TARGET): $(OBJ_FILES)
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
+
+# Regula pentru a compila fișiere .cpp în .o
+%.o: %.cpp
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Curățare fișiere temporare
+clean:
+	rm -f $(OBJ_FILES) $(TARGET)
+
+# Rulare (opțional)
+run: all
+	./$(TARGET)
+rebuild: clean all

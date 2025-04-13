@@ -50,6 +50,55 @@ void afisare_abonat(sf::RenderWindow& window, sf::Font& font, abonat& a) {
     window.draw(textTelefon);
     window.draw(textEmail);
 }
+
+void update(vector<text_input> prompt, abonat& Abonat)
+{
+    for (size_t i = 0; i < prompt.size(); ++i) {
+        if (prompt[i].getText() == "") {
+            std::cout << "Câmpul " << i + 1 << " este gol!" << std::endl;
+        } else {
+            // Setează câmpul corespunzător în obiectul Abonat
+            switch (i) {
+                case 0:
+                    Abonat.set_nume(prompt[i].getText());
+                    break;
+                case 1:
+                    Abonat.set_prenume(prompt[i].getText());
+                    break;
+                case 2:
+                    Abonat.set_cnp(prompt[i].getText());
+                    break;
+                case 3:
+                    Abonat.set_loc_nastere(stringToJudet(prompt[i].getText()));
+                    break;
+                case 4:
+                    Abonat.set_telefon(prompt[i].getText());
+                    break;
+                case 5:
+                    Abonat.set_email(prompt[i].getText());
+                    break;
+                default:
+                    break;
+            }
+
+        }
+    }
+}
+
+void get_info(vector<text_input> prompt, string& info)
+{
+    string nume, prenume, data;
+    nume = prompt[0].getText();
+    prenume = prompt[1].getText();
+    if(nume != "" && prenume != "") {
+        info = nume + ' ' + prenume;
+    } else {
+        for(size_t i = 2; i < prompt.size(); i++) {
+            data = prompt[i].getText();
+            if(data != "") info = data;
+        }
+    }
+}
 /*
 void afisare_meniu()
 {

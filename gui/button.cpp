@@ -19,6 +19,11 @@ Button::Button(sf::Vector2f position_, sf::Vector2f size_, sf::Color color_, std
                         position.y + size.y / 2 - text.getLocalBounds().height / 2); // Center the text
 }
 
+void Button::setText(std::string txt)
+{
+    text.setString(txt);
+}
+
 void Button::draw(sf::RenderWindow& window) {
     window.draw(shape);
     window.draw(text);

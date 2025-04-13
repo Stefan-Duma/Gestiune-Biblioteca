@@ -17,6 +17,8 @@ class Button {
         Button(){}
         ~Button(){}
         Button(sf::Vector2f position, sf::Vector2f size, sf::Color color, std::string text);
+
+        void setText(std::string txt);
         void draw(sf::RenderWindow& window);
         bool isClicked(sf::Vector2i mousePos);
         
